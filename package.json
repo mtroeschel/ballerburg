@@ -1,0 +1,23 @@
+{
+  "name": "ballerburg",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Ballerburg – Retro-Artilleriespiel (Neuimplementierung in TypeScript/Vite/Canvas)",
+  "scripts": {
+    "dev": "vite",
+    "check": "tsc --noEmit",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.2",
+    "vite": "^7.2.4",
+    "vitest": "^3.2.4"
+  },
+  "allowScripts": {
+    "esbuild@0.28.2": true
+  }
+}

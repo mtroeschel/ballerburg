@@ -1,0 +1,288 @@
+/* Ballerburg – Retro Monochrom (Weiss auf Schwarz) */
+
+:root {
+  --fg: #e8e8e8;
+  --fg-dim: #9aa0a6;
+  --bg: #000000;
+  --accent: #8cf0ff; /* optionales Phosphor-Blau */
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  background: var(--bg);
+  color: var(--fg);
+  overflow: hidden;
+}
+
+#game {
+  display: block;
+  outline: none;
+}
+
+#root {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* ---------- HUD ---------- */
+
+#hud {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 4px 8px;
+  font-family: "Courier New", monospace;
+  font-size: 13px;
+  line-height: 1.15;
+  color: var(--fg);
+  text-shadow: 0 0 2px rgba(255, 255, 255, 0.35);
+  background: rgba(0, 0, 0, 0.55);
+  pointer-events: auto;
+  user-select: none;
+}
+
+#hud .row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: baseline;
+}
+
+#hud .pane {
+  border: 1px solid var(--fg-dim);
+  padding: 2px 6px;
+}
+
+#hud .pane.active {
+  border-color: var(--accent);
+  color: var(--accent);
+  font-weight: bold;
+}
+
+#hud .stat {
+  white-space: nowrap;
+}
+
+#hud button {
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+  background: #000;
+  color: var(--fg);
+  border: 1px solid var(--fg);
+  padding: 2px 10px;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+#hud button:hover {
+  background: #222;
+  border-color: var(--accent);
+}
+
+#hud button:disabled {
+  color: #555;
+  border-color: #333;
+  cursor: default;
+}
+
+#hud button.primary {
+  background: #1a1a1a;
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+#windbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border: 1px solid var(--fg-dim);
+  padding: 2px 6px;
+  font-weight: bold;
+}
+
+#windbox .arrow {
+  font-size: 15px;
+}
+
+/* ---------- Overlays / Menues ---------- */
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: none;
+  background: rgba(0, 0, 0, 0.72);
+  pointer-events: auto;
+  overflow: auto;
+}
+
+.overlay.on {
+  display: flex;
+}
+
+.overlay .panel {
+  margin: 40px auto;
+  padding: 16px 24px;
+  max-width: 620px;
+  width: fit-content;
+  border: 2px solid var(--fg);
+  background: #000;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.25);
+  font-family: "Courier New", monospace;
+}
+
+.overlay h1 {
+  font-size: 22px;
+  letter-spacing: 2px;
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+  color: var(--accent);
+}
+
+.overlay h2 {
+  font-size: 15px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin: 10px 0 6px;
+}
+
+.overlay p,
+.overlay label,
+.overlay small {
+  font-size: 13px;
+  color: var(--fg-dim);
+}
+
+.kbd {
+  display: inline-block;
+  border: 1px solid var(--fg-dim);
+  padding: 0 4px;
+  font-size: 11px;
+  color: var(--fg);
+}
+
+.fields {
+  margin: 10px 0;
+}
+
+.fields label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  margin: 4px 0;
+  color: var(--fg);
+}
+
+.fields label input[type="radio"],
+.fields label input[type="checkbox"] {
+  accent-color: var(--accent);
+}
+
+.fields label input[type="range"] {
+  width: 220px;
+  accent-color: var(--accent);
+}
+
+.fields .val {
+  min-width: 90px;
+  text-align: right;
+  color: var(--accent);
+}
+
+.btnrow {
+  text-align: center;
+  margin-top: 14px;
+}
+
+.overlay button {
+  font-family: "Courier New", monospace;
+  font-size: 14px;
+  background: #000;
+  color: var(--fg);
+  border: 2px solid var(--fg);
+  padding: 6px 16px;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.overlay button:hover {
+  background: #222;
+  border-color: var(--accent);
+}
+
+.overlay button.primary {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: #101010;
+}
+
+/* Verwaltungs-Menue */
+.buyrow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 10px;
+  border: 1px solid #333;
+  margin-top: 5px;
+}
+
+.buyrow .info {
+  flex: 1;
+  font-size: 12px;
+  color: var(--fg);
+}
+
+.buyrow .info small {
+  color: var(--fg-dim);
+  display: block;
+}
+
+.buyrow .amounts {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.buyrow button {
+  min-width: 64px;
+  font-size: 12px;
+  padding: 2px 8px;
+}
+
+#msgline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 4px;
+  padding: 4px 8px;
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+  color: var(--accent);
+  text-shadow: 0 0 3px rgba(255, 255, 255, 0.4);
+  background: rgba(0, 0, 0, 0.45);
+  pointer-events: none;
+}
+
+#helpbar {
+  position: absolute;
+  right: 8px;
+  bottom: 4px;
+  font-family: "Courier New", monospace;
+  font-size: 11px;
+  color: var(--fg-dim);
+  pointer-events: none;
+  text-align: right;
+  white-space: pre-line;
+}
